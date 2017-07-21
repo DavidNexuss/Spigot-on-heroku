@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+mc_port=25566
+port=${1:-${PORT:-8080}}
+
+if [ -z "$NGROK_API_TOKEN" ]; then
+  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
+  exit 1
+fi
+
+# Start the TCP tunnel
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+echo "Starting ngrok..."
+eval "$ngrok_cmd | tee ngrok.log &"
+ngrok_pid=$!
+
+# Do an inline sync first, then start the background job
+echo "Starting sync..."
+bin/sync
+eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
+sync_pid=$!
+
+# create server config
+echo "server-port=${mc_port}" >> /app/server.properties
+touch whitelist.json
+touch banned-players.json
+touch banned-ips.json
+touch ops.json
+
+limit=$(ulimit -u)
+case $limit in
+  512)   # 2X Dyno
+  heap="768m"
+  ;;
+  32768) # PX Dyno
+  heap="4g"
+  ;;
+  *)     # 1X Dyno
+  heap="384m"
+  ;;
+esac
+
+echo "Starting: minecraft ${mc_port}"
+eval "java -Xmx${heap} -Xms${heap} -jar minecraft.jar nogui &"
+main_pid=$!
+
+trap "kill $ngrok_pid $main_pid $sync_pid" SIGTERM
+trap "kill -9 $ngrok_pid $main_pid $sync_pid; exit" SIGKILL
+
+eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start'"
