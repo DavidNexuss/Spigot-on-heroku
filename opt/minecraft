@@ -22,6 +22,8 @@ sync_pid=$!
 
 # create server config
 echo "server-port=${mc_port}" >> /app/server.properties
+# disable online mode
+echo "online-mode=false" >> /app/server.properties
 touch whitelist.json
 touch banned-players.json
 touch banned-ips.json
@@ -40,8 +42,8 @@ case $limit in
   ;;
 esac
 
-echo "Starting: minecraft ${mc_port}"
-eval "java -Xmx${heap} -Xms${heap} -jar minecraft.jar nogui &"
+echo "Starting: spigot 1.11.2 ${mc_port}"
+eval "java -Xmx${heap} -Xms${heap} -jar spigot-1.11.2.jar nogui &"
 main_pid=$!
 
 trap "kill $ngrok_pid $main_pid $sync_pid" SIGTERM
