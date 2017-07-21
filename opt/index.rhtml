@@ -1,6 +1,7 @@
 <% open('ngrok.log') do |f| %>
   <% f.lines.select { |line| line.include?("URL:") }.each do |line| %>
-    Server available at: <%= line.match(/tcp:\/\/(.+:[0-9]+) /)[1] %>
+    Currently proxy on: <%= line.match(/tcp:\/\/(.+:[0-9]+) /)[1] %>
+    More cool stuff will be here soon!
     <br />
   <% end %>
 <% end %>
