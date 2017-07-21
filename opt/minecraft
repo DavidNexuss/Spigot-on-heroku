@@ -20,6 +20,8 @@ bin/sync
 eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
 sync_pid=$!
 
+# accept eula
+echo eula=true > eula.txt
 # create server config
 echo "server-port=${mc_port}" >> /app/server.properties
 # disable online mode
