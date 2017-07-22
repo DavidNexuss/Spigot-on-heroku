@@ -88,3 +88,12 @@ described on the [Minecraft Wiki](http://minecraft.gamepedia.com/Server.properti
 
 You can add files such as `banned-players.json`, `banned-ips.json`, `ops.json`,
 `whitelist.json` to your Git repository and the Minecraft server will pick them up.
+## Connecting to the server console
+
+The Minecraft server runs inside a screen session. You can use [Heroku Exec](https://devcenter.heroku.com/articles/heroku-exec) to connect to your server console.
+
+Once you have Heroku Exec installed, you can connect to the console using 
+
+```
+$ heroku ps:exec screen -r minecraft
+```
