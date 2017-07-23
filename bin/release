@@ -3,5 +3,5 @@
 cat <<EOF
 ---
 default_process_types:
-  web: bin/minecraft $PORT
+  worker: bin/minecraft $PORT
 EOF
