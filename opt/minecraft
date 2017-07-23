@@ -44,15 +44,6 @@ case $limit in
   ;;
 esac
 
-# installing my plugins
-mkdir plugins
-cd plugins
-wget http://download969.mediafire.com/q014qq6v9u3g/l60qqiwcja0lrb7/plugins.zip
-unzip plugins.zip
-rm plugins.zip
-cd ~
-# done with that
-
 echo "Starting: spigot ...${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
 main_pid=$!
