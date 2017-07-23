@@ -53,6 +53,7 @@ Also if you want to connect to your server 'screen', use.
 ```sh-session
 $ heroku ps:exec --dyno=_YOUR DYNO HERE_
 ```
+**NOTE** the default dyno type is **worker**, enable the dyno via your Heroku dashboard in order to run the server.
 ## Syncing to S3
 
 The Heroku filesystem is [ephemeral](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem),
