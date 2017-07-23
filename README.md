@@ -21,10 +21,10 @@ Create a Heroku app, set your ngrok token, and push:
 
 ```sh-session
 $ heroku create
-$ heroku ps:exec    -adding heroku Exec to connect to server 'screen' session
 $ heroku buildpacks:add heroku/jvm
-$ heroku buildpacks:add https://github.com/kimbang012/Testing---Spigot-on-Heroku
+$ heroku buildpacks:add https://github.com/kimbang012/Spigot-on-Heroku
 $ heroku config:set NGROK_API_TOKEN="xxxxx"
+$ heroku ps:exec    - adding heroku Exec to connect to server 'screen' session [optional]
 $ git push heroku master
 ```
 
