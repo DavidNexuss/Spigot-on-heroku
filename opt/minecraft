@@ -22,7 +22,7 @@ sync_pid=$!
 
 # accept eula
 echo eula=true > eula.txt
-# create server config
+# create server config - change anything if you want
 echo "server-port=${mc_port}" >> /app/server.properties
 # disable online mode
 echo "online-mode=false" >> /app/server.properties
