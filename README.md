@@ -5,9 +5,6 @@ This is a [Heroku Buildpack](https://devcenter.heroku.com/articles/buildpacks)
 for running a Minecraft server in a [dyno](https://devcenter.heroku.com/articles/dynos).
 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-
 ## Usage
 
 Create a [free ngrok account](https://ngrok.com/) and copy your Auth token. Then create a new Git project with a `eula.txt` file:
