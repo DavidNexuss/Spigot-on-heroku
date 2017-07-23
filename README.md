@@ -102,6 +102,7 @@ You can add files such as `banned-players.json`, `banned-ips.json`, `ops.json`,
 The Minecraft server runs inside a 'screen' session. You can use [Heroku Exec](https://devcenter.heroku.com/articles/heroku-exec) to connect to your server console.
 
 Once you have Heroku Exec installed, you can connect to the console using 
+```sh-session
 $ heroku ps:exec
 $ Establishing credentials... done
 $ Connecting to web.1 on ⬢ lovely-minecraft-2351...
