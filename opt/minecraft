@@ -24,7 +24,7 @@ sync_pid=$!
 echo eula=true > eula.txt
 # create server config - change anything if you want
 echo "server-port=${mc_port}" >> /app/server.properties
-# disable online mode
+# disable online mode for cracked players
 echo "online-mode=false" >> /app/server.properties
 touch whitelist.json
 touch banned-players.json
@@ -40,12 +40,12 @@ case $limit in
   heap="4g"
   ;;
   *)     # 1X Dyno
-  heap="384m"
+  heap="456m"
   ;;
 esac
 
 echo "Starting: spigot ...${mc_port}"
-eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot-1.11.2.jar nogui"
+eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
 main_pid=$!
 
 # Flush the logfile every second, and ensure that the logfile exists
