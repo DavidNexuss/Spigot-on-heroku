@@ -86,7 +86,8 @@ $ heroku config:set NGROK_OPTS="-subdomain=my-subdomain"
 **Note** custom domain only available for paid users.
 
 ### Spigot version
-Spigot version are listed [here](https://getbukkit.com/spigot)
+Spigot version are listed [here](https://getbukkit.com/spigot).
+
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
 ```
