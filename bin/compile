@@ -39,11 +39,11 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
 echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 echo "-----> Installing vim editor... cause heroku doesnt have any :/"
-apt-get install vim -y --force-yes
-apt-get install vim-gnome -y --force-yes
-apt-get install vim-athena -y --force-yes
-apt-get install vim-nox -y --force-yes
-apt-get install vim-tiny -y --force-yes
+apt-get install vim -y --force-yes -d install --reinstall vim | indent
+apt-get install vim-gnome -y --force-yes -d install --reinstall vim-gnome | indent
+apt-get install vim-athena -y --force-yes -d install --reinstall vim-athena | indent
+apt-get install vim-nox -y --force-yes -d install --reinstall vim-nox | indent
+apt-get install vim-tiny -y --force-yes -d install --reinstall vim-tiny | indent
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
