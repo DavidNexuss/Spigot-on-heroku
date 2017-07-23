@@ -94,8 +94,8 @@ The Minecraft server runs inside a 'screen' session. You can use [Heroku Exec](h
 
 Once you have Heroku Exec installed, you can connect to the console using 
 $ heroku ps:exec
-Establishing credentials... done
-Connecting to web.1 on ⬢ lovely-minecraft-2351...
+$ Establishing credentials... done
+$ Connecting to web.1 on ⬢ lovely-minecraft-2351...
 $ screen -r minecraft
   ```
   
