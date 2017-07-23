@@ -54,6 +54,7 @@ Also if you want to connect to your server 'screen', use.
 $ heroku ps:exec --dyno=_YOUR DYNO HERE_
 ```
 **NOTE** the default dyno type is **worker**, enable the dyno via your Heroku dashboard in order to run the server.
+
 ## Syncing to S3
 
 The Heroku filesystem is [ephemeral](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem),
@@ -82,13 +83,14 @@ You can customize ngrok by setting the `NGROK_OPTS` config variable. For example
 ```
 $ heroku config:set NGROK_OPTS="-subdomain=my-subdomain"
 ```
+**Note** custom domain only available for paid users.
 
-### Minecraft
-
+### Spigot version
+Spigot version are listed [here](https://getbukkit.com/spigot)
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
 ```
-$ heroku config:set MINECRAFT_VERSION="1.8.3"
+$ heroku config:set MINECRAFT_VERSION="1.11.2"
 ```
 
 You can also configure the server properties by creating a `server.properties`
@@ -98,6 +100,7 @@ described on the [Minecraft Wiki](http://minecraft.gamepedia.com/Server.properti
 
 You can add files such as `banned-players.json`, `banned-ips.json`, `ops.json`,
 `whitelist.json` to your Git repository and the Minecraft server will pick them up.
+
 ## Connecting to the server console
 
 The Minecraft server runs inside a 'screen' session. You can use [Heroku Exec](https://devcenter.heroku.com/articles/heroku-exec) to connect to your server console.
