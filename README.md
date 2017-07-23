@@ -46,11 +46,13 @@ as the server name.
 
 ## Optional: change dyno type
 You can change the dyno type that you want in bin/release.
+
 By that if you want to check your server address, check the "Status" in your [ngrok dashboard](https://dashboard.ngrok.com/status).
+
 Also if you want to connect to your server 'screen', use.
-'''
+```sh-session
 $ heroku ps:exec --dyno=_worker dyno here_
-'''
+```
 ## Syncing to S3
 
 The Heroku filesystem is [ephemeral](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem),
