@@ -44,7 +44,7 @@ case $limit in
   ;;
 esac
 
-echo "Starting: spigot 1.11.2 ${mc_port}"
+echo "Starting: spigot ...${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot-1.11.2.jar nogui"
 main_pid=$!
 
