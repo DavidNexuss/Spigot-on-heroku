@@ -51,7 +51,7 @@ By that if you want to check your server address, check the "Status" in your [ng
 
 Also if you want to connect to your server 'screen', use.
 ```sh-session
-$ heroku ps:exec --dyno=_worker dyno here_
+$ heroku ps:exec --dyno=_YOUR DYNO HERE_
 ```
 ## Syncing to S3
 
