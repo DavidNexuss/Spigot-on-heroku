@@ -1,9 +1,10 @@
 {
   "name": "Minecraft",
-  "description": "A Minecraft Server on Heroku",
+  "description": "Spigot on Heroku",
   "keywords": [
     "games",
-    "minecraft"
+    "minecraft",
+    "spigot"
   ],
   "repository": "https://github.com/kimbang012/Spigot-on-Heroku",
   "env": {
