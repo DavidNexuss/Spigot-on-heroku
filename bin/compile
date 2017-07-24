@@ -33,6 +33,11 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
+echo "---- Spigot on Heroku ----"
+echo "by Tanashi - MineShift Ltd"
+echo "Thank you for installing my refix buildpack"
+echo "Thank you jkutner for the original buildpack"
+
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
