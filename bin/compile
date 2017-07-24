@@ -98,3 +98,8 @@ mkdir -p $BUILD_DIR/bin
 
 chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
+
+echo "!! WARNING !!"
+echo "Access you Heroku dashboard to start"
+echo "the worker dyn, or the server wont run"
+echo "-------<o/---------"
