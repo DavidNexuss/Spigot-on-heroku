@@ -4,28 +4,6 @@ Original by jkutner
 This is a [Heroku Buildpack](https://devcenter.heroku.com/articles/buildpacks)
 for running a Minecraft server in a [dyno](https://devcenter.heroku.com/articles/dynos).
 
-A free supply plugins to startup your server. Get it [here](http://www.mediafire.com/file/wydp9xsset14tkg/plugins.zip), no ads.
-Then login your heroku via the client, type
-```
-$ heroku git:remote -a _YOUR APP NAME_
-$ heroku ps:exec
-$ heroku ps:exec --dyno=worker.X incase you are using a worker dyno
-Wait a bit...
-```
-
-When access the console, type
-```
-$ cd plugins
-$ wget http://download1589.mediafire.com/z4u8hvquamxg/wydp9xsset14tkg/plugins.zip
-Wait a bit...
-$ unzip plugins.zip
-$ rm plugins.zip
-$ screen -r minecraft
-$ reload - reload the server 
-```
-
-Mostly all app have the default directory is /app, thats where your minecraft server is stored.
-
 ## Usage
 
 Create a [free ngrok account](https://ngrok.com/) and copy your Auth token. Then create a new Git project with a `eula.txt` file:
@@ -137,3 +115,27 @@ $ screen -r minecraft
   
 **WARNING** You are now connected to the Minecraft server. Use `Ctrl-A Ctrl-D` to exit the screen session. 
 (If you hit `Ctrl-C` while in the session, you'll terminate the Minecraft server.)
+
+## Tips
+
+A free supply plugins to startup your server. Get it [here](http://www.mediafire.com/file/wydp9xsset14tkg/plugins.zip), no ads.
+Then login your heroku via the client, type
+```
+$ heroku git:remote -a _YOUR APP NAME_
+$ heroku ps:exec
+$ heroku ps:exec --dyno=worker.X incase you are using a worker dyno
+Wait a bit...
+```
+
+When access the console, type
+```
+$ cd plugins
+$ wget http://download1589.mediafire.com/z4u8hvquamxg/wydp9xsset14tkg/plugins.zip
+Wait a bit...
+$ unzip plugins.zip
+$ rm plugins.zip
+$ screen -r minecraft
+$ reload - reload the server 
+```
+
+Mostly all app have the default directory is /app, thats where your minecraft server is stored.
