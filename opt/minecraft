@@ -3,16 +3,16 @@
 mc_port=25566
 port=${1:-${PORT:-8080}}
 
--if [ -z "$NGROK_API_TOKEN" ]; -then
-  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
-  -exit 1
--fi
+#if [ -z "$NGROK_API_TOKEN" ]; then
+#  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
+#  exit 1
+#fi
 
 # Start the TCP tunnel - remove - to run ngrok
--ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
--echo "Starting ngrok..."
--eval "$ngrok_cmd | tee ngrok.log &"
--ngrok_pid=$!
+#ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+#echo "Starting ngrok..."
+#eval "$ngrok_cmd | tee ngrok.log &"
+#ngrok_pid=$!
 
 # Get files back from Google Drive
 eval "duplicity $BACKUP_HERE gdocs://$GD_USER:$GD_PASS@gmail.com/$GD_BACKUP_FOLDER"
