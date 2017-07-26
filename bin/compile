@@ -38,11 +38,6 @@ echo "by Tanashi - MineShift Ltd"
 echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
 
-echo "-----> Adding plugins..."
-wget http://download843.mediafire.com/dspp8j7798kg/1bpdnx5vrw8ed16/plugins.zip
-unzip plugins.zip
-echo "Done"
-
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
