@@ -14,8 +14,13 @@ port=${1:-${PORT:-8080}}
 #eval "$ngrok_cmd | tee ngrok.log &"
 #ngrok_pid=$!
 
-# Get files back from Google Drive
-eval "duplicity $BACKUP_HERE gdocs://$GD_USER:$GD_PASS@gmail.com/$GD_BACKUP_FOLDER"
+# Installing Dropbox sync
+curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
+chmod +x dropbox_uploader.sh
+# run command using ./dropbox_uploader.sh to add access token
+# ./dropbox_uploader.sh upload will list all options
+# add jobs in the scheduler to backup daily
+# more info here https://github.com/andreafabrizi/Dropbox-Uploader
 
 
 # Do an inline sync first, then start the background job
@@ -28,6 +33,7 @@ sync_pid=$!
 echo eula=true > eula.txt
 # create server config - change anything if you want
 echo "server-port=${mc_port}" >> /app/server.properties
+echo "server-ip=localhost" >> /app/server.properties # add public ip to server
 # disable online mode for cracked players
 echo "online-mode=false" >> /app/server.properties
 touch whitelist.json
@@ -54,8 +60,8 @@ main_pid=$!
 
 sleep 30
 
-echo "Using netcat to listen port..."
--eval "screen -L -h 2048 -dmS openport netcat -l -k 25566"
+echo "Using socat to listen port..."
+eval "screen -L -h 2048 -dmS openport socat TCP-LISTEN:${mc_port},fork TCP:localhost:${mc_port}"
 echo "Done open port, use ...curl ipinfo.io/ip... to check your ip"
 
 # Flush the logfile every second, and ensure that the logfile exists
