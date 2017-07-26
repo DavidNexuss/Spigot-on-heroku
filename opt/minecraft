@@ -9,10 +9,14 @@ port=${1:-${PORT:-8080}}
 -fi
 
 # Start the TCP tunnel - remove - to run ngrok
-ngrok_cmd="Lbin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
-echo "Starting ngrok..."
-eval "$ngrok_cmd | tee ngrok.log &"
-ngrok_pid=$!
+-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+-echo "Starting ngrok..."
+-eval "$ngrok_cmd | tee ngrok.log &"
+-ngrok_pid=$!
+
+# Get files back from Google Drive
+eval "duplicity $BACKUP_HERE gdocs://$GD_USER:$GD_PASS@gmail.com/$GD_BACKUP_FOLDER"
+
 
 # Do an inline sync first, then start the background job
 echo "Starting sync..."
@@ -51,8 +55,7 @@ main_pid=$!
 sleep 30
 
 echo "Using netcat to listen port..."
-eval "screen -L -h 2048 -dmS openport netcat -l -k 25566"
-main_pid=$!
+-eval "screen -L -h 2048 -dmS openport netcat -l -k 25566"
 echo "Done open port, use ...curl ipinfo.io/ip... to check your ip"
 
 # Flush the logfile every second, and ensure that the logfile exists
