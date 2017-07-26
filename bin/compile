@@ -38,10 +38,6 @@ echo "by Tanashi - MineShift Ltd"
 echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
 
-echo "-----> Installing dropbox sync... "
-curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
-chmod +x dropbox_uploader.sh
-
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
@@ -72,14 +68,6 @@ echo -n "-----> Installing ngrok... "
 curl --silent -o ngrok.zip -L "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip" | indent
 unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
-
-
-echo -n "-----> Installing Vim... "
-mkdir vim
-curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C vim
-export PATH=$PATH:/app/vim/bin
-bash
-echo "HELLLLL YEAAAHHH!!!"
 
 minecraft_version=${MINECRAFT_VERSION:-"1.8.8-R0.1-SNAPSHOT-latest"}
 minecraft_url="https://cdn.getbukkit.org/spigot/spigot-${minecraft_version}.jar"
