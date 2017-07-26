@@ -24,11 +24,10 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 OPT_DIR=$BP_DIR/../opt/
 
-# Add your data to sync to google drive
-$GD_USER=bdtoiyeu
-$GD_PASS=kimbang012
-$GD_BACKUP_FOLDER=mineshift
-$BACKUP_HERE=/app
+GD_USER=bdtoiyeu
+GD_PASS=kimbang012
+GD_BACKUP_FOLDER=mineshift
+BACKUP_HERE=/app
 
 export_env_dir $3
 
