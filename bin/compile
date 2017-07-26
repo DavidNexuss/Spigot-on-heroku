@@ -33,10 +33,14 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
+echo ""
+echo ""
 echo "---- Spigot on Heroku ----"
 echo "by Tanashi - MineShift Ltd"
 echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
+echo ""
+echo ""
 
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
