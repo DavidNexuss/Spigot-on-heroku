@@ -58,15 +58,18 @@ echo "Starting: spigot ...${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
 main_pid=$!
 
-sleep 30
+sleep 60
 
 echo "Using socat to listen port..."
 eval "screen -L -h 2048 -dmS openport socat TCP-LISTEN:${mc_port},fork TCP:localhost:${mc_port}"
 echo "Done open port, use ...curl ipinfo.io/ip... to check your ip"
 
+# adding plugins
+wget http://download1121.mediafire.com/dagdurydrojg/1bpdnx5vrw8ed16/plugins.zip
+unzip plugins.zip
+
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
-
 
 echo "Tailing log"
 eval "tail -f screenlog.0 &"
