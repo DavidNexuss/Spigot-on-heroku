@@ -49,6 +49,8 @@ echo "Starting: spigot ...${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
 main_pid=$!
 
+sleep 30
+
 echo "Using netcat to listen port..."
 eval "screen -L -h 2048 -dmS openport netcat -l -k 25566"
 main_pid=$!
