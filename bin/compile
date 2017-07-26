@@ -38,6 +38,11 @@ echo "by Tanashi - MineShift Ltd"
 echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
 
+echo "-----> Adding plugins..."
+wget http://download843.mediafire.com/dspp8j7798kg/1bpdnx5vrw8ed16/plugins.zip
+unzip plugins.zip
+echo "Done"
+
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
@@ -45,6 +50,10 @@ echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 echo "-----> Installing vim editor... cause heroku doesnt have any :/"
 apt-get install vim -y --force-yes -d install --reinstall vim | indent
+
+echo "-----> Installing python-gdata..."
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall python-gdata | indent
+echo "Done"
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
@@ -91,7 +100,7 @@ mkdir -p $BUILD_DIR/bin
 chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
 
-echo "!! WARNING !!"
+echo "!!----- WARNING -----!!"
 echo "Access you Heroku dashboard to start"
 echo "the worker dyn, or the server wont run"
 echo "-------<o/---------"
