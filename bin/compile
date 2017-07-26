@@ -24,11 +24,6 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 OPT_DIR=$BP_DIR/../opt/
 
-GD_USER=bdtoiyeu
-GD_PASS=kimbang012
-GD_BACKUP_FOLDER=mineshift
-BACKUP_HERE=/app
-
 export_env_dir $3
 
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
@@ -105,7 +100,11 @@ mkdir -p $BUILD_DIR/bin
 chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
 
+echo ""
+echo ""
 echo "!!----- WARNING -----!!"
 echo "Access you Heroku dashboard to start"
-echo "the worker dyn, or the server wont run"
+echo "the worker dyno, or the server wont run"
 echo "-------<o/---------"
+echo ""
+echo ""
