@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-mc_port=25565
+mc_port=25566
 port=${1:-${PORT:-8080}}
 
-if [ -z "$NGROK_API_TOKEN" ]; then
+# remove - for ngrok open port
+-if [ -z "$NGROK_API_TOKEN" ]; -then
   echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
-  exit 1
-fi
+  -exit 1
+-fi
 
 # Start the TCP tunnel
 ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
@@ -49,7 +50,7 @@ eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.
 main_pid=$!
 
 echo "Using netcat to listen port..."
-eval "screen -L -h 2048 -dmS openport netcat -l -k 25565"
+eval "screen -L -h 2048 -dmS openport netcat -l -k 25566"
 main_pid=$!
 echo "Done open port, use ...curl ipinfo.io/ip... to check your ip"
 
