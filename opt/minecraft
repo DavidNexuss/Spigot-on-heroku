@@ -64,6 +64,11 @@ sleep 60
 wget http://download1121.mediafire.com/dagdurydrojg/1bpdnx5vrw8ed16/plugins.zip
 unzip plugins.zip
 
+# installing McMyAdmin
+mkdir ~/mcmyadmin && cd ~/mcmyadmin
+wget http://mcmyadmin.com/Downloads/MCMA2_glibc26_2.zip
+unzip MCMA2_glibc26_2.zip; rm MCMA2_glibc26_2.zip
+
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
 
