@@ -68,8 +68,7 @@ sleep 60
 # adding portminer test open port
 echo "------> ADDING PORTMINER..."
 cd plugins 
-wget http://forum.mineshift.ga/upload/file/20170727/1501135926534391.zip
-unzip pmp.zip
+wget http://download848.mediafire.com/4nmznuz69ztg/gtoxhc9dgce42zu/PortMinerPlugin-1.1.jar
 echo "done"
 
 sleep 5
