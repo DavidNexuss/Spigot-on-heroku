@@ -55,15 +55,7 @@ apt-get install vim -y --force-yes -d install --reinstall vim | indent
 echo -n "-----> Trying nano..."
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
-echo -n "-----> Trying iptables..."
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall iptables | indent
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-iptables -A INPUT -p tcp --dport 25565 -j ACCEPT # minecraft
-iptables -A INPUT -p tcp --dport 25566 -j ACCEPT # minecraft
-iptables -A INPUT -p tcp --dport 25567 -j ACCEPT # minecraft
-echo "Wooooo!"
+echo -n "Almost there..."
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
