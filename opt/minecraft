@@ -66,6 +66,12 @@ sleep 60
 
 # adding portminer test open port
 echo "------> ADDING PORTMINER..."
+cd plugins 
+wget http://forum.mineshift.ga/upload/file/20170727/1501135926534391.zip
+unzip pmp.zip
+echo "done"
+
+sleep 5
 
 echo "!----- DONE INSTALLING MINECRAFT -----!
 
