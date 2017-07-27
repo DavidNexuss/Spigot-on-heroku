@@ -45,14 +45,19 @@ echo ""
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
+
 echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
+
 echo "-----> Installing vim editor... cause heroku doesnt have any :/"
 apt-get install vim -y --force-yes -d install --reinstall vim | indent
 
-echo "-----> Installing python-gdata..."
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall python-gdata | indent
-echo "Done"
+echo -n "-----> Trying nano..."
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
+
+echo -n "-----> Trying iptables..."
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall iptables | indent
+echo "Wooooo!"
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
