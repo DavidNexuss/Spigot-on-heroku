@@ -42,8 +42,12 @@ echo "Thank you jkutner for the original buildpack"
 echo ""
 echo ""
 
-echo "-----> Installing s3cmd... "
+echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
+apt-get --assume-yes upgrade
+echo "done"
+
+echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
 
 echo "-----> Installing screen... "
