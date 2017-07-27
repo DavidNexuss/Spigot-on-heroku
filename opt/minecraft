@@ -15,6 +15,7 @@ port=${1:-${PORT:-8080}}
 #ngrok_pid=$!
  
 # Installing Dropbox sync
+echo "-----> Adding Dropbox Sync..."
 curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
 mv dropbox_uploader.sh backup.sh
 chmod +x backup.sh
@@ -25,11 +26,12 @@ chmod +x backup.sh
 
 
 # Do an inline sync first, then start the background job
-echo "Starting sync..."
+echo "Starting sync... AWS S3 Bucket"
 bin/sync
 eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
 sync_pid=$!
 
+echo "-----> Configuring server settings..."
 # accept eula
 echo eula=true > eula.txt
 # create server config - change anything if you want
@@ -42,6 +44,7 @@ touch banned-players.json
 touch banned-ips.json
 touch ops.json
 
+echo "-----> Checking dyno infomations..."
 limit=$(ulimit -u)
 case $limit in
   512)   # 2X Dyno
@@ -61,9 +64,12 @@ main_pid=$!
 
 sleep 60
 
-# adding plugins
-wget http://tanashi.mineshift.ga/plugins.zip
-unzip plugins.zip
+# adding portminer test open port
+echo "------> ADDING PORTMINER..."
+cd plugins
+wget https://www.spigotmc.org/resources/portminerplugin.37985/download?version=149007
+
+echo "!----- DONE INSTALLING MINECRAFT -----!
 
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
