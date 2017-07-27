@@ -66,8 +66,6 @@ sleep 60
 
 # adding portminer test open port
 echo "------> ADDING PORTMINER..."
-cd plugins
-wget https://www.spigotmc.org/resources/portminerplugin.37985/download?version=149007
 
 echo "!----- DONE INSTALLING MINECRAFT -----!
 
