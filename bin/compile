@@ -57,6 +57,12 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 echo -n "-----> Trying iptables..."
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall iptables | indent
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp --dport 25565 -j ACCEPT # minecraft
+iptables -A INPUT -p tcp --dport 25566 -j ACCEPT # minecraft
+iptables -A INPUT -p tcp --dport 25567 -j ACCEPT # minecraft
 echo "Wooooo!"
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
