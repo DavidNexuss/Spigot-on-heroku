@@ -8,6 +8,9 @@ port=${1:-${PORT:-25565}}
 #  exit 1
 #fi
 
+echo "-----> Installing localtunnel..."
+npm install -g localtunnel
+
 # Start the TCP tunnel - remove - to run ngrok
 #ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
 #echo "Starting ngrok..."
