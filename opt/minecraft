@@ -38,7 +38,7 @@ echo "-----> Stating Dropbox Sync..."
 ./backup.sh download backup/backup.zip /app # one time download backup
 unzip backup.zip
 rm backup.zip
-eval "while true; do sleep 300; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
+eval "while true; do sleep 300; ./backup.sh delete backup/backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
 dropbox_pid=$!
 
 # Do an inline sync first, then start the background job
