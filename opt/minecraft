@@ -38,12 +38,14 @@ echo "-----> Configuring Dropbox sync..."
 ./backup.sh
 sleep 1
 echo "$OAUTH_ACCESS_TOKEN"
+echo ""
 sleep 1
 echo "y"
+echo ""
 echo " done"
 
 echo "-----> Stating Dropbox Sync..."
-./backup.sh download backup/backup.zip /app # one time download backup
+./backup.sh download backup/backup.zip /app
 unzip backup.zip
 rm backup.zip
 eval "while true; do sleep 300; ./backup.sh delete backup/backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
