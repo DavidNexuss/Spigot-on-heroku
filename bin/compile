@@ -56,7 +56,7 @@ echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
 echo "-----> Installing nano..."
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
+apt-get -y install nano | indent
 
 sleep 3
 
