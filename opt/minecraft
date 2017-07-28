@@ -42,7 +42,7 @@ echo "-----> Configuring server settings..."
 echo eula=true > eula.txt
 # create server config - change anything if you want
 echo "server-port=${mc_port}" >> /app/server.properties
-echo "server-ip=localhost" >> /app/server.properties # add public ip to server
+echo "server-ip=34.192.31.89" >> /app/server.properties # add public ip to server
 # disable online mode for cracked players
 echo "online-mode=false" >> /app/server.properties
 touch whitelist.json
