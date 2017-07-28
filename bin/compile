@@ -60,7 +60,7 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 sleep 3
 
-echo -n "-----> Almost there..."
+echo "-----> Almost there..."
 
 sleep 1
 
@@ -85,6 +85,7 @@ done
 echo -n "-----> Installing ngrok... "
 curl --silent -o ngrok.zip -L "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip" | indent
 unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
+
 echo "done"
 
 minecraft_version=${MINECRAFT_VERSION:-"1.8.8-R0.1-SNAPSHOT-latest"}
@@ -93,6 +94,7 @@ minecraft_url="https://cdn.getbukkit.org/spigot/spigot-${minecraft_version}.jar"
 echo -n "-----> Installing Spigot ${minecraft_version}... "
 curl -o spigot.jar -s -L $minecraft_url
 mv spigot.jar $BUILD_DIR/spigot.jar
+
 echo "done"
 
 if [ -n "${MINECRAFT_EULA:-""}" ]; then
