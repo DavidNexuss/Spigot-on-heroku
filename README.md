@@ -8,13 +8,6 @@ for running a Minecraft server in a [dyno](https://devcenter.heroku.com/articles
 
 Create a [free ngrok account](https://ngrok.com/) and copy your Auth token. Then create a new Git project with a `eula.txt` file:
 
-```sh-session
-$ echo 'eula=true' > eula.txt
-$ git init
-$ git add eula.txt
-$ git commit -m "first commit"
-```
-
 Then, install the [Heroku toolbelt](https://toolbelt.heroku.com/).
 Create a Heroku app, set your ngrok token, and push:
 
@@ -22,16 +15,9 @@ Create a Heroku app, set your ngrok token, and push:
 $ heroku create
 $ heroku buildpacks:add heroku/jvm
 $ heroku buildpacks:add https://github.com/kimbang012/Spigot-on-Heroku
-$ heroku buildpacks:add https://github.com/andreafabrizi/Dropbox-Uploader
 $ heroku config:set NGROK_API_TOKEN="xxxxx"
-$ heroku ps:exec    - adding heroku Exec to connect to server 'screen' session [optional]
+$ heroku ps:exec
 $ git push heroku master
-```
-
-Finally, open the app:
-
-```sh-session
-$ heroku open
 ```
 
 This will display the ngrok logs, which will contain the name of the server
@@ -73,6 +59,14 @@ $ heroku config:set AWS_SECRET_KEY=xxx
 ```
 
 The buildpack will sync your world to the bucket every 60 seconds, but this is configurable by setting the `AWS_SYNC_INTERVAL` config var.
+
+## Syncing to Dropbox
+
+First, create a dropbox account. Then go to the Dropbox [Dev dashboard](https://dropbox.com/developers/apps), create an app.
+
+After create an app, scroll down to **Generate access token** click **Generate**, it will give you the access token.
+
+Copy that access token. In the heroku app terminal, type ./backup.sh, it will request the Token, put your **token** in there and answer **yes** and there you go.
 
 ## Customizing
 
