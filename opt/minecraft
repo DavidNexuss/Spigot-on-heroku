@@ -36,12 +36,11 @@ sleep 3
 
 echo "-----> Configuring Dropbox sync..."
 ./backup.sh
-sleep 1
+sleep 5
 echo "$OAUTH_ACCESS_TOKEN"
-echo ""
-sleep 1
+sleep 5
 echo "y"
-echo ""
+sleep 5
 echo " done"
 
 echo "-----> Stating Dropbox Sync..."
