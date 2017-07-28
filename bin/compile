@@ -42,24 +42,27 @@ echo "Thank you jkutner for the original buildpack"
 echo ""
 echo ""
 
+sleep 5
+
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
 apt-get --assume-yes upgrade
 echo "done"
 
-echo "-----> Installing s3cmd... "
+echo "-----> Installing S3CMD... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
 
 echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
-echo "-----> Installing vim editor... cause heroku doesnt have any :/"
-apt-get install vim -y --force-yes -d install --reinstall vim | indent
-
-echo -n "-----> Trying nano..."
+echo "-----> Installing nano..."
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
-echo -n "Almost there..."
+sleep 3
+
+echo -n "-----> Almost there..."
+
+sleep 1
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
@@ -87,7 +90,7 @@ echo "done"
 minecraft_version=${MINECRAFT_VERSION:-"1.8.8-R0.1-SNAPSHOT-latest"}
 minecraft_url="https://cdn.getbukkit.org/spigot/spigot-${minecraft_version}.jar"
 
-echo -n "-----> Installing Minecraft ${minecraft_version}... "
+echo -n "-----> Installing Spigot ${minecraft_version}... "
 curl -o spigot.jar -s -L $minecraft_url
 mv spigot.jar $BUILD_DIR/spigot.jar
 echo "done"
@@ -106,11 +109,13 @@ mkdir -p $BUILD_DIR/bin
 chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
 
+sleep 5
+
 echo ""
 echo ""
 echo "!!----- WARNING -----!!"
 echo "Access you Heroku dashboard to start"
 echo "the worker dyno, or the server wont run"
-echo "-------<o/---------"
+echo "---------<o/-----------"
 echo ""
 echo ""
