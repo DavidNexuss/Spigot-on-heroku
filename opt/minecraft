@@ -25,12 +25,19 @@ chmod +x backup.sh
 # ./dropbox_uploader.sh upload will list all options
 # add jobs in the scheduler to backup daily
 # more info here https://github.com/andreafabrizi/Dropbox-Uploader
+echo " done"
 
-echo "-----> Syncing to Dropbox..."
-bin/dropbox
-eval "while true; do sleep 300; then; zip world; then; ./backup.sh upload world.zip backup; then; zip plugins; then; ./backup.sh upload plugins.zip backup; done &"
+if [ -z "$OAUTH_ACCESS_TOKEN" ]; then
+  echo "You must specify the OAUTH_ACCESS_TOKEN config var to sync to dropbox!"
+  else
+  echo "Founded Dropbox access token!"
+done
+
+sleep 3
+
+echo "-----> Stating Dropbox Sync..."
+eval "while true; do sleep 300; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
 dropbox_pid=$!
-
 
 # Do an inline sync first, then start the background job
 echo "-----> Start sync to AWS..."
