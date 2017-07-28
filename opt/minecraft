@@ -9,19 +9,7 @@ port=${1:-${PORT:-25565}}
 #fi
 
 sleep 3
-echo "!-----! WARNING: GET READY FOR CHAOS !-----!"
-sleep 5
 
-echo "-----> Installing Node.js..."
-wget https://nodejs.org/dist/v4.4.1/node-v4.4.1-linux-x64.tar.xz
-mv node-v4.4.1-linux-x64.tar.xz nodejs.zip
-unzip nodejs.zip
-mv node-v4.4.1-linux-x64 nodejs
-cp nodejs/bin/node ~/bin
-cd ~/bin
-ln -s ../nodejs/lib/node_modules/npm/bin/npm-cli.js npm
-sleep 5
-echo " done"
 
 echo "-----> Installing localtunnel..."
 npm install -g localtunnel
