@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 mc_port=25565
-port=${1:-${PORT:-25565}}
+port=${1:-${PORT:-8080}}
 
-#if [ -z "$NGROK_API_TOKEN" ]; then
-#  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
-#  exit 1
-#fi
+if [ -z "$NGROK_API_TOKEN" ]; then
+  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
+  exit 1
+fi
 
 sleep 3
 
 # Start the TCP tunnel - remove - to run ngrok
-#ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
-#echo "Starting ngrok..."
-#eval "$ngrok_cmd | tee ngrok.log &"
-#ngrok_pid=$!
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+echo "Starting ngrok..."
+eval "$ngrok_cmd | tee ngrok.log &"
+ngrok_pid=$!
  
-if [ -z "$OAUTH_ACCESS_TOKEN" ]; then
-  echo "You must specify the OAUTH_ACCESS_TOKEN config var to sync to dropbox!"
+if [ -z "$DBTOKEN" ]; then
+  echo "You must specify the DBTOKEN config var to sync to dropbox!"
   exit 1
 fi
 
@@ -35,7 +35,7 @@ echo " done"
 sleep 3
 
 echo "-----> Configuring Dropbox sync..."
-./backup.sh $TOKEN
+./backup.sh $DBTOKEN
 sleep 5
 y
 sleep 5
