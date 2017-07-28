@@ -10,10 +10,6 @@ port=${1:-${PORT:-25565}}
 
 sleep 3
 
-
-echo "-----> Installing localtunnel..."
-npm install -g localtunnel
-
 # Start the TCP tunnel - remove - to run ngrok
 #ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
 #echo "Starting ngrok..."
@@ -42,7 +38,7 @@ echo "-----> Configuring server settings..."
 echo eula=true > eula.txt
 # create server config - change anything if you want
 echo "server-port=${mc_port}" >> /app/server.properties
-echo "server-ip=34.192.31.89" >> /app/server.properties # add public ip to server
+echo "server-ip=54.163.52.167" >> /app/server.properties # add public ip to server
 # disable online mode for cracked players
 echo "online-mode=false" >> /app/server.properties
 touch whitelist.json
