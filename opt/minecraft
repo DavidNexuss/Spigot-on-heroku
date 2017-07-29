@@ -28,7 +28,6 @@ mv .dropbox_uploader?dl=0  .dropbox_uploader
 # Start the TCP tunnel - remove - to run ngrok
 echo "-----> Starting ngrok tunnel..."
 ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
-echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
  
