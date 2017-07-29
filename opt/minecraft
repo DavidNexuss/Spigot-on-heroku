@@ -8,11 +8,6 @@ if [ -z "$NGROK_API_TOKEN" ]; then
   exit 1
 fi
 
-if [ -z "$DBTOKEN" ]; then
-  echo "You must specify the DBTOKEN config var to sync to dropbox!"
-  exit 1
-fi
-
 if [ -z "$DBCONFIG" ]; then
   echo "You must specify the Dropbox Uploader config file download link!. I would recommend using dropbox."
   echo "Dropbox download link would look like this https://www.dropbox.com/s/y7wg2bq1ko3xxxx/.dropbox_uploader?dl=0"
@@ -26,6 +21,9 @@ sleep 3
 echo "-----> Downloading provided DU config file..."
 wget "$DBCONFIG"
 echo " done"
+
+# Change the file name if not correct
+mv .dropbox_uploader?dl=0  .dropbox_uploader
 
 # Start the TCP tunnel - remove - to run ngrok
 echo "-----> Starting ngrok tunnel..."
