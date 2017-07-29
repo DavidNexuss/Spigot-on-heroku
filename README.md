@@ -8,11 +8,11 @@ This is a Heroku [buildpack](https://devcenter.heroku.com/articles/buildpacks), 
 
 1. The Heroku toolbelt installed
 
-2. A Free Heroku account. [Sign up here](https://signup.heroku.com)
+2. A free Heroku account. [Sign up here](https://signup.heroku.com)
 
-3. An Ngrok account (for ip tunneling). [Sign up here](https://ngrok.com/signup)
+3. A ngrok account (for ip tunneling). [Sign up here](https://ngrok.com/signup)
 
-4. A Dropbox account for files sync. [Sign up here](https://www.dropbox.com/login)
+4. A dropbox account for files sync. [Sign up here](https://www.dropbox.com/login) (info below)
 
 ## Usage
 
@@ -55,3 +55,35 @@ heroku ps:scale worker=1
 And your done!
 
 Go [here](https://dashboard.ngrok.com/status/) to check your server ip.
+
+## Files sync
+
+The Heroku filesystem is ephemeral, which means files written to the file system will be destroyed when the server is restarted.
+
+Minecraft keeps all of the data for the server in flat files on the file system. Thus, if you want to keep you world, you'll need to sync it to Dropbox or AWS S3.
+
+You can add Amazon S3 to sync your datas
+
+First, create an AWS account and an S3 bucket. Then configure the bucket and your AWS keys like this:
+
+```
+$ heroku config:set AWS_BUCKET=your-bucket-name
+$ heroku config:set AWS_ACCESS_KEY=xxx
+$ heroku config:set AWS_SECRET_KEY=xxx
+```
+
+The buildpack will sync your world to the bucket every 60 seconds, but this is configurable by setting the AWS_SYNC_INTERVAL config var.
+
+# Customizing Minecraft
+
+You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
+
+By default version is `1.8.8-R0.1-SNAPSHOT-latest`, name based on GetBukkit.org site.
+
+```
+$ heroku config:set MINECRAFT_VERSION="1.8.8-R0.1-SNAPSHOT-latest"
+```
+
+You can also configure the server properties by creating a server.properties file in your project and adding it to Git. This is how you would set things like Creative mode and Hardcore difficulty. The various options available are described on the Minecraft Wiki.
+
+You can add files such as ``banned-players.json``, ``banned-ips.json``, ``ops.json``, ``whitelist.json`` to your Git repository and the Minecraft server will pick them up.
