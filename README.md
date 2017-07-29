@@ -76,7 +76,7 @@ $ heroku config:set AWS_SECRET_KEY=xxx
 
 The buildpack will sync your world to the bucket every 60 seconds, but this is configurable by setting the AWS_SYNC_INTERVAL config var.
 
-# Customizing Minecraft
+## Customizing Minecraft
 
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
