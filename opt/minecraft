@@ -28,6 +28,7 @@ wget "$DBCONFIG"
 echo " done"
 
 # Start the TCP tunnel - remove - to run ngrok
+echo "-----> Starting ngrok tunnel..."
 ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
@@ -39,18 +40,18 @@ curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dr
 mv dropbox_uploader.sh backup.sh
 chmod +x backup.sh
 # run command using ./dropbox_uploader.sh to add access token
-# ./dropbox_uploader.sh upload will list all options
-# add jobs in the scheduler to backup daily
+# ./dropbox_uploader.sh help to list all options
 # more info here https://github.com/andreafabrizi/Dropbox-Uploader
 echo " done"
 
 sleep 3
 
 echo "-----> Starting Dropbox Sync..."
-./backup.sh download backup/backup.zip /app
-unzip backup.zip
+./backup.sh download backup.zip 
+unzip backup
 rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup/backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
+eval "while true; do sleep 300; ./backup.sh delete backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml banned-ips.json banned-players.json whitelist.json wepif.yml permissions.yml ops.json; ./backup.sh upload backup.zip /; done &"
+echo " done"
 dropbox_pid=$!
 
 # Do an inline sync first, then start the background job
