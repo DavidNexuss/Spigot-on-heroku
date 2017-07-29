@@ -48,12 +48,6 @@ rm backup.zip
 eval "while true; do sleep 300; ./backup.sh delete backup/backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml ops.json; ./backup.sh upload backup.zip backup; done &"
 dropbox_pid=$!
 
-echo "-----> Installing TCP Tunnel..."
-wget http://www.vakuumverpackt.de/tcptunnel/tcptunnel-0.8.tar.gz
-tar -xvzf tcptunnel-0.8.tar.gz
-sleep 1
-echo "done"
-
 # Do an inline sync first, then start the background job
 echo "-----> Start sync to AWS..."
 bin/sync
