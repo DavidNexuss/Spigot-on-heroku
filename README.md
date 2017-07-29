@@ -12,12 +12,13 @@ Then, install the [Heroku toolbelt](https://toolbelt.heroku.com/).
 Create a Heroku app, set your ngrok token, and push:
 
 ```sh-session
-$ heroku create
-$ heroku buildpacks:add heroku/jvm
-$ heroku buildpacks:add https://github.com/kimbang012/Spigot-on-Heroku
-$ heroku config:set NGROK_API_TOKEN="xxxxx"
-$ heroku ps:exec
-$ git push heroku master
+heroku create
+heroku buildpacks:add heroku/jvm
+heroku buildpacks:add https://github.com/kimbang012/Spigot-on-Heroku
+heroku config:set NGROK_API_TOKEN="xxxxx"
+heroku config:set DBTOKEN="xxxxx"
+heroku ps:exec
+git push heroku master
 ```
 
 This will display the ngrok logs, which will contain the name of the server
