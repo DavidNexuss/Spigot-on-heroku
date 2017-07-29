@@ -62,6 +62,8 @@ The Heroku filesystem is ephemeral, which means files written to the file system
 
 Minecraft keeps all of the data for the server in flat files on the file system. Thus, if you want to keep you world, you'll need to sync it to Dropbox or AWS S3.
 
+By defaule, dropbox sync will automatic backup your data every 5 minutes.
+
 You can add Amazon S3 to sync your datas
 
 First, create an AWS account and an S3 bucket. Then configure the bucket and your AWS keys like this:
