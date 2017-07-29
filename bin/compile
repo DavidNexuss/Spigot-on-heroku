@@ -56,13 +56,13 @@ echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
 echo "-----> Installing nano..."
-apt-get -y --force-yes -d install nano | indent
+apt-get $APT-OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 sleep 3
 
 echo "-----> Almost there..."
 
-sleep 1
+sleep 5
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
@@ -121,3 +121,7 @@ echo "in dorder to run the server"
 echo "---------<o/-----------"
 echo ""
 echo ""
+
+sleep 5
+
+echo "-----> Installation completed! <-----"
