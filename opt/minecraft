@@ -10,8 +10,6 @@ fi
 
 if [ -z "$DBCONFIG" ]; then
   echo "You must specify the Dropbox Uploader config file download link!. I would recommend using dropbox."
-  echo "Dropbox download link would look like this https://www.dropbox.com/s/y7wg2bq1ko3xxxx/.dropbox_uploader?dl=0"
-  echo "Remove the ?dl=0 from the link and it should be ok"
   exit 1
 fi
 
