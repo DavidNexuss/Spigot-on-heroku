@@ -32,6 +32,7 @@ heroku buildpacks:add heroku/jvm
 heroku buildpacks:add https://github.com/kimbang012/Spigot-on-heroku
 heroku ps:exec
 git commit -m "Heroku Exec" --allow-empty
+done
 ```
 
 Then, manually add these command with your Ngrok auth token, Dropbox app config file link (read below)
@@ -50,6 +51,7 @@ Then copy these commands in the cmd
 ```
 git push heroku master
 heroku ps:scale worker=1
+done
 ```
 
 And your done!
@@ -80,12 +82,16 @@ The buildpack will sync your world to the bucket every 60 seconds, but this is c
 
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
-By default version is `1.8.8-R0.1-SNAPSHOT-latest`, name based on GetBukkit.org site.
+By default version is `1.8.8-R0.1-SNAPSHOT-latest`, files name are list at [GetBukkit](https://getbukkit.org/spigot) offical site.
 
 ```
-$ heroku config:set MINECRAFT_VERSION="1.8.8-R0.1-SNAPSHOT-latest"
+heroku config:set MINECRAFT_VERSION="1.8.8-R0.1-SNAPSHOT-latest"
 ```
 
 You can also configure the server properties by creating a server.properties file in your project and adding it to Git. This is how you would set things like Creative mode and Hardcore difficulty. The various options available are described on the Minecraft Wiki.
 
 You can add files such as ``banned-players.json``, ``banned-ips.json``, ``ops.json``, ``whitelist.json`` to your Git repository and the Minecraft server will pick them up.
+
+## Tips
+
+You may create your own server on your computer with your own plugins, worlds then ZIP it to a file with the name **backup.zip**. Upload it to dropbox and you will have your own configured server.
