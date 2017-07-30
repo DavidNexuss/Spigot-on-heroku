@@ -55,8 +55,10 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
 echo "-----> Installing screen... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
-echo "-----> Installing nano..."
-apt-get $APT-OPTIONS -y --force-yes -d install --reinstall nano | indent
+echo "-----> Installing proxylocal..."
+chmod -R 777 /var/lib/gems
+gem install proxylocal
+echo "done"
 
 sleep 3
 
