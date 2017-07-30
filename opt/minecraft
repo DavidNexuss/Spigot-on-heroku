@@ -47,7 +47,7 @@ echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
 unzip backup
 rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml banned-ips.json banned-players.json whitelist.json wepif.yml permissions.yml ops.json; ./backup.sh upload backup.zip /; done &"
+eval "while true; do sleep 60; ./backup.sh delete backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml banned-ips.json banned-players.json whitelist.json wepif.yml permissions.yml ops.json; ./backup.sh upload backup.zip /; done &"
 echo " done"
 dropbox_pid=$!
 
