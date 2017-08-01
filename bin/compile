@@ -57,7 +57,7 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
 ## extra
 echo "-----> Installing OpenVPN... "
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openvpn-openssl openvpn-easy-rsa | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall openvpn | indent
 echo "done"
 
 sleep 3
