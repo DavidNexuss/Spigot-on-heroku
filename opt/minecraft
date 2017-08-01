@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+mc_port=25565
+port=${1:-${PORT:-8080}}
+
+if [ -z "$NGROK_API_TOKEN" ]; then
+  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
+  exit 1
+fi
+
+if [ -z "$DBCONFIG" ]; then
+  echo "You must specify the Dropbox access token!. I would recommend using dropbox."
+  exit 1
+fi
+
+sleep 3
+
+# Download dropbox uploader config file
+echo "-----> Downloading provided DU config file..."
+echo OAUTH_ACCESS_TOKEN=$DBCONFIG > .dropbox_uploader
+echo " done"
+
+# Start the TCP tunnel - remove - to run ngrok
+echo "-----> Starting ngrok tunnel..."
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+eval "$ngrok_cmd | tee ngrok.log &"
+ngrok_pid=$!
+ 
+# Installing Dropbox sync
+echo "-----> Adding Dropbox Sync..."
+curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
+mv dropbox_uploader.sh backup.sh
+chmod +x backup.sh
+# ./dropbox_uploader.sh help to list all options
+# more info here https://github.com/andreafabrizi/Dropbox-Uploader
+echo " done"
+
+sleep 3
+
+echo "-----> Starting Dropbox Sync..."
+./backup.sh download backup.zip 
+unzip backup
+rm backup.zip
+eval "while true; do sleep 60; ./backup.sh delete backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end plugins spigot.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; done &"
+echo " done"
+dropbox_pid=$!
+
+# Do an inline sync first, then start the background job
+echo "-----> Start sync to AWS..."
+bin/sync
+eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
+sync_pid=$!
+
+echo "-----> Configuring server settings..."
+# accept eula
+echo eula=true > eula.txt
+# create server config - change anything if you want
+echo "server-port=${mc_port}" >> /app/server.properties
+echo "server-ip=127.0.0.1" >> /app/server.properties # add public ip to server
+# disable online mode for cracked players
+echo "online-mode=false" >> /app/server.properties
+touch whitelist.json
+touch banned-players.json
+touch banned-ips.json
+touch ops.json
+
+echo "-----> Scaling dyno..."
+limit=$(ulimit -u)
+case $limit in
+  512)   # 2X Dyno
+  heap="768m"
+  ;;
+  32768) # PX Dyno
+  heap="4g"
+  ;;
+  *)     # 1X Dyno
+  heap="530m"
+  ;;
+esac
+
+echo "-----> Starting: Spigot on port ${mc_port}"
+eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
+main_pid=$!
+
+echo "-----> Loading libraries... "
+
+sleep 60
+
+echo "-----> Loading completed ..."
+
+sleep 5
+
+echo "-----> Instalation completed <-----"
+
+sleep 3
+
+echo "-----> Hope you enjoy server <-----"
+
+# Flush the logfile every second, and ensure that the logfile exists
+screen -X "logfile 1" && sleep 1
+
+echo "Tailing log"
+eval "tail -f screenlog.0 &"
+tail_pid=$!
+
+trap "kill $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid" SIGTERM
+trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGKILL
+
+eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start'"
+
