@@ -58,7 +58,7 @@ $ heroku config:set DBCONFIG="_file download link here_"
 
 **NOTE** the download link should look like this if you use dropbox: https://www.dropbox.com/s/y7wg2bq1ko3xxxx/.dropbox_uploader?dl=0
 
-Remove the ?dl=0 at the end for the link.
+Remove the ```?dl=0``` at the end for the link.
 
 Then copy these commands in the cmd
 
