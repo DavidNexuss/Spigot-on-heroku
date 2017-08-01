@@ -42,6 +42,20 @@ $ heroku config:set NGROK_API_TOKEN="xxxxx"
 $ heroku config:set DBCONFIG="xxxxx"
 ```
 
+**Attention** A configuration file should look like this
+
+Name of the file: **.dropbox_uploader**
+
+Edit the file:
+
+```
+OAUTH_ACCESS_TOKEN=_replace your Dropbox access token here_
+```
+
+Upload to dropbox, get the download link and add it in config var, or type:
+
+$ heroku config:set DBCONFIG="_file download link here_"
+
 **NOTE** the download link should look like this if you use dropbox: https://www.dropbox.com/s/y7wg2bq1ko3xxxx/.dropbox_uploader?dl=0
 
 Remove the ?dl=0 at the end for the link.
