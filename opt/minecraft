@@ -16,7 +16,7 @@ fi
 sleep 3
 
 # Download dropbox uploader config file
-echo "-----> Downloading provided DU config file..."
+echo "-----> Configuring DU config file..."
 echo OAUTH_ACCESS_TOKEN=$DBCONFIG > .dropbox_uploader
 echo " done"
 
@@ -77,6 +77,7 @@ case $limit in
   heap="530m"
   ;;
 esac
+# dont worry if error R14 appear. unless you reach 1GB. server will stop.
 
 echo "-----> Starting: Spigot on port ${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -Xms${heap} -jar spigot.jar nogui"
