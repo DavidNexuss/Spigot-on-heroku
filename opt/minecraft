@@ -13,6 +13,18 @@ if [ -z "$DBCONFIG" ]; then
   exit 1
 fi
 
+## extra
+echo "-----> Downloading openvpn file..."
+wget https://s3-us-west-2.amazonaws.com/generous-vpn/Generous-VPN-free.ovpn
+mv Generous-VPN-free.opvn free.vpn
+echo " done"
+
+echo "-----> Connecting VPN... "
+openvpn -config free.vpn
+dig	+short	myip.opendns.com@resolver1.opendns.com
+echo " done"
+## extra
+
 sleep 3
 
 # Download dropbox uploader config file
