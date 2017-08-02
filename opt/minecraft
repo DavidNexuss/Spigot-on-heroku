@@ -97,6 +97,23 @@ sleep 3
 
 echo "-----> Hope you enjoy server <-----"
 
+## EXTRAS
+echo "-----> Installing DynuDNS... "
+dpkg -i https://www.dynu.com/support/downloadfile/31
+echo username kimbang012 > /etc/dynuiuc/dynuiuc.conf
+echo password kimbang012 > /etc/dynuiuc/dynuiuc.conf
+echo quite false > /etc/dynuiuc/dynuiuc.conf
+echo pollinterval 120 > /etc/dynuiuc/dynuiuc.conf
+echo ipv4 true > /etc/dynuiuc/dynuiuc.conf
+echo ipv6 false > /etc/dynuiuc/dynuiuc.conf
+sleep 2
+systemctl restart dynuiuc.service
+echo " done"
+
+eval "tail -f /var/log/dynuiuc.log &"
+
+### EXTRAS
+
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
 
