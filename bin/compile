@@ -44,9 +44,11 @@ echo ""
 
 sleep 5
 
+dpkg --configure -a
+
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y upgrade | indent
+#apt-get $APT_OPTIONS -y upgrade | indent
 echo "done"
 
 echo "-----> Installing stuffs... "
