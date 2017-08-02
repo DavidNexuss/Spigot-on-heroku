@@ -109,3 +109,8 @@ trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGK
 
 eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start'"
 
+## EXTRAS
+echo "-----> Configuring DDClient..."
+curl -o ddclient.conf https://raw.githubusercontent.com/kimbang012/Spigot-on-heroku/master/opt/private
+mv ddclient.conf /etc/ddclient.conf
+echo " done"
