@@ -1,0 +1,15 @@
+# ddclient configuration for Dynu
+#
+# /etc/ddclient.conf
+daemon=60                                                    # Check every 60 seconds.
+syslog=yes                                                   # Log update msgs to syslog.
+mail=root                                                    # Mail all msgs to root.
+mail-failure=root                                            # Mail failed update msgs to root.
+pid=/var/run/ddclient.pid                                    # Record PID in file.                                      
+use=web, web=checkip.dynu.com/, web-skip='IP Address'        # Get ip from server.
+server=api.dynu.com                                          # IP update server.
+protocol=tcp                        
+login=NguynCaoKimBngJohny                                    # Your username.
+password=kimbang012                                          # Password or MD5/SHA256 of password.
+mineshift.kozow.com                                          # List one or more hostnames one on each line.
+#MYDOMAIN.COM
