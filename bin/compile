@@ -46,7 +46,6 @@ sleep 5
 
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y upgrade | indent
 echo "done"
 
 echo "-----> Installing stuffs... "
