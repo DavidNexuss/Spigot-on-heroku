@@ -46,23 +46,23 @@ sleep 5
 
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
-#apt-get $APT_OPTIONS -y upgrade | indent
+apt-get $APT_OPTIONS -y upgrade | indent
 echo "done"
 
 echo "-----> Installing stuffs... "
-apt-get $APT_OPTIONS -y --force-yes install --reinstall libio-socket-ssl-perl | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall libio-socket-ssl-perl | indent
 
 echo "-----> Installing S3CMD... "
-apt-get $APT_OPTIONS -y --force-yes install --reinstall s3cmd | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
 
 echo "-----> Installing screen... "
-apt-get $APT_OPTIONS -y --force-yes install --reinstall screen | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
 
 echo "-----> Installing nano... "
-apt-get $APT_OPTIONS -y --force-yes install --reinstall nano | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 echo "-----> Installing DDClient... "
-apt-get $APT_OPTIONS -y --force-yes install --reinstall ddclient | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall ddclient | indent
 sleep 3
 
 echo "-----> Almost there..."
