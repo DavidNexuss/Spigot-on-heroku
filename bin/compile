@@ -44,7 +44,7 @@ echo ""
 
 sleep 5
 
-mkdir /var/log/apt
+sudo mkdir /var/log/apt
 
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
