@@ -46,15 +46,20 @@ sleep 5
 
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
-yes | apt-get --assume-yes upgrade
+apt-get $APT_OPTIONS -y upgrade | indent
 echo "done"
 
 echo "-----> Installing S3CMD... "
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3cmd | indent
+apt-get $APT_OPTIONS -y install --reinstall s3cmd | indent
 
 echo "-----> Installing screen... "
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall screen | indent
+apt-get $APT_OPTIONS -y install --reinstall screen | indent
 
+echo "-----> Installing nano... "
+apt-get $APT_OPTIONS -y install --reinstall nano | indent
+
+echo "-----> Installing DDClient... "
+apt-get $APT_OPTIONS -y install --reinstall ddclient | indent
 sleep 3
 
 echo "-----> Almost there..."
