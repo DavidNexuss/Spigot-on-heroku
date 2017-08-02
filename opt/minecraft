@@ -37,6 +37,9 @@ echo " done"
 
 sleep 3
 
+echo "---------------------------------------"
+dpkg -i https://www.dynu.com/support/downloadfile/31 
+
 echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
 unzip backup
