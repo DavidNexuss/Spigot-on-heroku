@@ -112,5 +112,7 @@ eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Po
 ## EXTRAS
 echo "-----> Configuring DDClient..."
 curl -o ddclient.conf https://raw.githubusercontent.com/kimbang012/Spigot-on-heroku/master/opt/private
-mv ddclient.conf /etc/ddclient.conf
+mkdir /etc/ddclient
+cp ddclient.conf /etc/ddclient.conf
+cp ddclient.conf /etc/ddclient/ddclient.conf
 echo " done"
