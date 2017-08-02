@@ -3,15 +3,15 @@
 mc_port=25565
 port=${1:-${PORT:-8080}}
 
-if [ -z "$NGROK_API_TOKEN" ]; then
-  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
-  exit 1
-fi
+#if [ -z "$NGROK_API_TOKEN" ]; then
+#  echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
+#  exit 1
+#fi
 
-if [ -z "$DBCONFIG" ]; then
-  echo "You must specify the Dropbox access token!. I would recommend using dropbox."
-  exit 1
-fi
+#if [ -z "$DBCONFIG" ]; then
+#  echo "You must specify the Dropbox access token!. I would recommend using dropbox."
+#  exit 1
+#fi
 
 sleep 3
 
