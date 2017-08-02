@@ -49,6 +49,9 @@ apt-get $APT_OPTIONS update | indent
 apt-get $APT_OPTIONS -y upgrade | indent
 echo "done"
 
+echo "-----> Installing stuffs... "
+apt-get $APT_OPTIONS -y install --reinstall libio-socket-ssl-perl | indent
+
 echo "-----> Installing S3CMD... "
 apt-get $APT_OPTIONS -y install --reinstall s3cmd | indent
 
