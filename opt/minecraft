@@ -37,6 +37,9 @@ echo " done"
 
 sleep 3  
 
+echo "-----> Updating IP to afraid.org..."
+eval "while true; do sleep 5; curl http://freedns.afraid.org/dynamic/update.php?$DNSKEY; done &"
+
 echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
 unzip backup
