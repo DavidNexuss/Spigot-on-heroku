@@ -37,10 +37,10 @@ echo " done"
 
 sleep 3  
 
-echo "-----> Updating IP to afraid.org..."
-eval "while true; do sleep 5; curl http://freedns.afraid.org/dynamic/update.php?VmU3eXhjV0MzMTZxNVNCaEhxVXZLVndrOjE2OTg3ODEz; done &"
-eval "while true; do sleep 5; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=sv.mineshift.linkpc.net; done &"
-eval "while true; do sleep 5; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=mineshift.linkpc.net; done &"
+echo "-----> Updating IP to afraid.org/dnsexit.com..."
+eval "while true; do sleep 300; curl http://freedns.afraid.org/dynamic/update.php?VmU3eXhjV0MzMTZxNVNCaEhxVXZLVndrOjE2OTg3ODEz; done &"
+eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=sv.mineshift.linkpc.net; done &"
+eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=mineshift.linkpc.net; done &"
 
 echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
