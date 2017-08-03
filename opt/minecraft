@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+public_ip= 'curl ipinfo.io/ip'
 mc_port=25565
 port=${1:-${PORT:-8080}}
 
@@ -39,8 +40,8 @@ sleep 3
 
 echo "-----> Updating IP to afraid.org/dnsexit.com..."
 eval "while true; do sleep 300; curl http://freedns.afraid.org/dynamic/update.php?VmU3eXhjV0MzMTZxNVNCaEhxVXZLVndrOjE2OTg3ODEz; done &"
-eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=sv.mineshift.linkpc.net; done &"
-eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=mineshift.linkpc.net; done &"
+eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=sv.mineshift.linkpc.net&myip=${public_ip}; done &"
+eval "while true; do sleep 300; curl http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=mineshift.linkpc.net&myip=${public_ip}; done &"
 
 echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
