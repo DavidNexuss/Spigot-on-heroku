@@ -4,5 +4,5 @@ cat <<EOF
 ---
 default_process_types:
   web: bin/minecraft $PORT
-  worker: bash bin/refresh.sh
+  worker: bin/refresh
 EOF
