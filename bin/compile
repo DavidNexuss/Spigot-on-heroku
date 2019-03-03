@@ -62,6 +62,10 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 echo "-----> Installing DDClient... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall ddclient | indent
+
+echo "-----> Installing Htop... "
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall htop | indent
+
 sleep 3
 
 echo "-----> Almost there..."
