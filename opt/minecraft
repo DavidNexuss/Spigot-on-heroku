@@ -88,7 +88,7 @@ esac
 # dont worry if error R14 appear. unless you reach 1GB. server will stop.
 
 echo "-----> Starting: Spigot on port ${mc_port}"
-eval "screen -L -h 2048 -dmS minecraft java -Xmx${heap} -jar spigot.jar nogui"
+eval "screen -L -h 2048 -dmS minecraft java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui"
 main_pid=$!
 
 echo "-----> Loading libraries... "
