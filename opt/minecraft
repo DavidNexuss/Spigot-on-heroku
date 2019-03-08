@@ -105,6 +105,7 @@ sleep 3
 
 echo "-----> Hope you enjoy server <-----"
 
+export NGROKIP=$(./ngrokgetip)
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
 
