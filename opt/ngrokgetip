@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+TEXT=$(cat ngrok.log)
+TEXT=${TEXT#*[Addr:}
+TEXT=${TEXT%%]*}
+echo $TEXT
