@@ -120,6 +120,7 @@ mkdir -p $BUILD_DIR/bin
 chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
 chmod +x $BUILD_DIR/bin/refresh
+chmod +x $BUILD_DIR/bin/ngrokgetip
 sleep 5
 
 echo ""
