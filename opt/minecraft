@@ -87,8 +87,10 @@ case $limit in
 esac
 # dont worry if error R14 appear. unless you reach 1GB. server will stop.
 
+export NGROKIP=$(./ngrokgetip)
+echo "-----> NGROK IP: $NGROKIP"
 echo "-----> Starting: Spigot on port ${mc_port}"
-eval "screen -L -h 2048 -dmS minecraft java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui"
+eval "screen -L -h 2048 -dmS export NGROKIP=$(./ngrokgetip) && minecraft java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui"
 main_pid=$!
 
 echo "-----> Loading libraries... "
@@ -104,8 +106,6 @@ echo "-----> Instalation completed <-----"
 sleep 3
 
 echo "-----> Hope you enjoy server <-----"
-
-export NGROKIP=$(./ngrokgetip)
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
 
