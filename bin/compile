@@ -122,6 +122,7 @@ chmod +x $BUILD_DIR/bin/minecraft
 chmod +x $BUILD_DIR/bin/sync
 chmod +x $BUILD_DIR/bin/refresh
 chmod +x $BUILD_DIR/ngrokgetip
+chmod +x $BUILD_DIR/runserver
 sleep 5
 
 echo ""
