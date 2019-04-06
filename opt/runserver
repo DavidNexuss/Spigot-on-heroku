@@ -1,0 +1,2 @@
+export NGROKIP=$(./ngrokgetip)
+java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui
