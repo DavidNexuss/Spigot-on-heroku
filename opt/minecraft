@@ -90,7 +90,7 @@ esac
 export NGROKIP=$(./ngrokgetip)
 echo "-----> NGROK IP: $NGROKIP"
 echo "-----> Starting: Spigot on port ${mc_port}"
-eval "screen -L -h 2048 -dmS export NGROKIP=$(./ngrokgetip) && minecraft java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui"
+eval "screen -L -h 2048 -dmS minecraft export NGROKIP=$(./ngrokgetip) && java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui"
 main_pid=$!
 
 echo "-----> Loading libraries... "
