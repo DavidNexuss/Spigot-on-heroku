@@ -14,8 +14,6 @@ if [ -z "$DBCONFIG" ]; then
   exit 1
 fi
 
-sleep 3
-
 # Download dropbox uploader config file
 echo "-----> Configuring DU config file..."
 echo OAUTH_ACCESS_TOKEN=$DBCONFIG > .dropbox_uploader
@@ -35,8 +33,6 @@ chmod +x backup.sh
 # ./dropbox_uploader.sh help to list all options
 # more info here https://github.com/andreafabrizi/Dropbox-Uploader
 echo " done"
-
-sleep 3  
 
 #echo "-----> Updating IP to afraid.org/dnsexit.com..."
 #eval "while true; do sleep 120; curl http://freedns.afraid.org/dynamic/update.php?VmU3eXhjV0MzMTZxNVNCaEhxVXZLVndrOjE2OTg3ODEz; done &"
@@ -95,15 +91,9 @@ main_pid=$!
 
 echo "-----> Loading libraries... "
 
-sleep 60
-
 echo "-----> Loading completed ..."
 
-sleep 5
-
 echo "-----> Instalation completed <-----"
-
-sleep 3
 
 echo "-----> Hope you enjoy server <-----"
 # Flush the logfile every second, and ensure that the logfile exists
