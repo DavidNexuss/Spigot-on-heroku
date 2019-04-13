@@ -106,5 +106,5 @@ tail_pid=$!
 trap "kill $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid" SIGTERM
 trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGKILL
 
-eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start' &"
-eval "while true; do sleep 600; echo "Refreshing dyno"; echo $HEROKU_URL; curl $HEROKU_URL; done"
+#eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start' &"
+#eval "while true; do sleep 600; echo "Refreshing dyno"; echo $HEROKU_URL; curl $HEROKU_URL; done"
