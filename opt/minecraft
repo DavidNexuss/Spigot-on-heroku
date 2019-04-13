@@ -44,7 +44,7 @@ echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
 unzip backup
 rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup.zip; rm backup.zip; zip -r backup world world_nether world_the_end mstore plugins spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; done &"
+eval "while true; do sleep 300; ./backup.sh delete backup.zip; zip -r backup world world_nether world_the_end mstore plugins server.properties spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; rm backup.zip; done &"
 echo " done"
 dropbox_pid=$!
 
@@ -107,4 +107,4 @@ trap "kill $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid" SIGTERM
 trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGKILL
 
 eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start' &"
-eval "while true; do sleep 600; echo "Refreshing dyno"; echo $HEROKU_URL; wget $HEROKU_URL; done"
+eval "while true; do sleep 600; echo "Refreshing dyno"; echo $HEROKU_URL; curl $HEROKU_URL; done"
