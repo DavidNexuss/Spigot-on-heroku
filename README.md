@@ -29,7 +29,7 @@ Next, simply copy the following lines to your Command Promt (cmd)
 ```
 heroku create
 heroku buildpacks:add heroku/jvm
-heroku buildpacks:add https://github.com/kimbang012/Spigot-on-heroku
+heroku buildpacks:add https://github.com/DavidNexuss/Spigot-on-heroku
 heroku ps:exec
 git commit -m "Heroku Exec" --allow-empty
 done
