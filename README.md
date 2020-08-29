@@ -103,5 +103,5 @@ You may create your own server on your computer with your own plugins, worlds th
 
 ## Credits
 
-Original Spigot port by Tanashi
+Original Spigot port by Tanashi  
 Original buildpack by jkutner
