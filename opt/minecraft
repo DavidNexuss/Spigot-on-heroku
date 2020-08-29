@@ -85,7 +85,7 @@ esac
 
 export NGROKIP=$(./ngrokgetip)
 echo "-----> NGROK IP: $NGROKIP"
-echo "-----> Starting: Spigot on port ${mc_port}"
+echo "-----> Starting: PaperMC on port ${mc_port}"
 eval "screen -L -h 2048 -dmS minecraft ./runserver"
 main_pid=$!
 

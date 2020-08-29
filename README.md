@@ -1,6 +1,9 @@
-# Spigot on Heroku
+# PaperMC on Heroku
 
-## Run your spigot minecraft server on the cloud with Heroku.
+## Run your papermc minecraft server on the cloud with Heroku.
+
+This project is a fork from Tanashi Spigot on Heroku buildpack.
+[PaperMC](https://papermc.io) is an active spigot fork focused on performance.
 
 This is a Heroku [buildpack](https://devcenter.heroku.com/articles/buildpacks), in order to install it you need to install the Heroku [toolbelt](https://toolbelt.heroku.com).
 
@@ -79,10 +82,15 @@ The buildpack will sync your world to the bucket every 60 seconds, but this is c
 
 You can choose the Minecraft version by setting the MINECRAFT_VERSION like so:
 
-By default version is `1.8.8-R0.1-SNAPSHOT-latest`, files name are list at [GetBukkit](https://getbukkit.org/spigot) offical site.
+```
+heroku config:set MINECRAFT_VERSION="Paper-1.16"
+```
+You can check all available versions of PaperMC [here](https://papermc.io/ci/)
+
+Or you can specify custom build url by setting the PAPER env variable like so:
 
 ```
-heroku config:set MINECRAFT_VERSION="1.8.8-R0.1-SNAPSHOT-latest"
+heroku config:set PAPER="https://papermc.io/ci/job/Paper-1.16/lastSuccessfulBuild/artifact/paperclip.jar" 
 ```
 
 You can also configure the server properties by creating a server.properties file in your project and adding it to Git. This is how you would set things like Creative mode and Hardcore difficulty. The various options available are described on the Minecraft Wiki.
@@ -92,3 +100,8 @@ You can add files such as ``banned-players.json``, ``banned-ips.json``, ``ops.js
 ## Tips
 
 You may create your own server on your computer with your own plugins, worlds then ZIP it to a file with the name **backup.zip**. Upload it to dropbox and you will have your own configured server.
+
+## Credits
+
+Original Spigot port by Tanashi
+Original buildpack by jkutner

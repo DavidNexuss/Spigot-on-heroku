@@ -11,4 +11,4 @@ case $limit in
   ;;
 esac
 export NGROKIP=$(./ngrokgetip)
-java -Xms${heap} -Xmx${heap} -jar spigot.jar nogui
+java -Xms${heap} -Xmx${heap} -jar papermc.jar nogui

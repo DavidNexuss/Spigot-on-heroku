@@ -34,12 +34,10 @@ mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo ""
-echo ""
-echo "---- Spigot on Heroku ----"
-echo "by Tanashi - MineShift Ltd"
+echo "---- PaperMC on Heroku ----"
+echo "by DavidNexuss (original Spigot build by Tanashi - MineShift Ltd)"
 echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
-echo ""
 echo ""
 
 sleep 5
@@ -62,9 +60,6 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 
 echo "-----> Installing DDClient... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall ddclient | indent
-
-echo "-----> Installing Htop... "
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall htop | indent
 
 sleep 3
 
@@ -96,12 +91,12 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 
 echo "done"
 
-minecraft_version=${MINECRAFT_VERSION:-"1.8.8-R0.1-SNAPSHOT-latest"}
-minecraft_url=${PAPER:-"https://papermc.io/api/v1/paper/1.13.2/554/download"}
+minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
+minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
 
 echo -n "-----> Installing PaperClipMC ${minecraft_version}... "
-curl -o spigot.jar -s -L $minecraft_url
-mv spigot.jar $BUILD_DIR/spigot.jar
+curl -o papermc.jar -s -L $minecraft_url
+mv papermc.jar $BUILD_DIR/papermc.jar
 
 echo "done"
 
