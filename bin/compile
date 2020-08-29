@@ -93,8 +93,8 @@ echo "done"
 
 minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
 
-if [ ! -z "$PAPER" ]; then
-    echo " ------> Installing PaperClipMC from $PAPER"
+if [ ! -z ${PAPER} ]; then
+    echo " ------> Installing PaperClipMC from ${PAPER}"
 else
     echo -n "-----> Installing PaperClipMC ${minecraft_version}... "
 fi
