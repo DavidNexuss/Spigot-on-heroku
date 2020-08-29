@@ -92,6 +92,10 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
 
 minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
+
+if [ ! -z "PAPER" ]; then
+    echo "Overriding default download path, now using: $PAPER" 
+fi
 minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
 
 echo -n "-----> Installing PaperClipMC ${minecraft_version}... "
@@ -119,17 +123,6 @@ chmod +x $BUILD_DIR/bin/sync
 chmod +x $BUILD_DIR/bin/refresh
 chmod +x $BUILD_DIR/ngrokgetip
 chmod +x $BUILD_DIR/runserver
-sleep 5
-
-echo ""
-echo ""
-echo "!!----- WARNING -----!!"
-echo "Insert heroku ps:scale worker=1"
-echo "in dorder to run the server"
-echo "---------<o/-----------"
-echo ""
-echo ""
-
 sleep 5
 
 echo "-----> Installation completed! <-----"
