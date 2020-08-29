@@ -93,12 +93,13 @@ echo "done"
 
 minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
 
-if [ ! -z "PAPER" ]; then
-    echo "Overriding default download path, now using: $PAPER" 
+if [ ! -z "$PAPER" ]; then
+    echo " ------> Installing PaperClipMC from $PAPER"
+else
+    echo -n "-----> Installing PaperClipMC ${minecraft_version}... "
 fi
-minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
 
-echo -n "-----> Installing PaperClipMC ${minecraft_version}... "
+minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
 curl -o papermc.jar -s -L $minecraft_url
 mv papermc.jar $BUILD_DIR/papermc.jar
 
