@@ -111,7 +111,7 @@ echo "-----> Starting Dropbox Sync..."
 ./backup.sh download backup.zip 
 unzip backup
 rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup.zip; zip -r backup world* mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; rm backup.zip; done &"
+eval "while true; do sleep 300; ./backup.sh delete backup.zip; zip -r backup $additional_files .dropbox_uploader world* mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; rm backup.zip; done &"
 echo " done"
 dropbox_pid=$!
 
