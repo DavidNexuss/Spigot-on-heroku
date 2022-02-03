@@ -93,6 +93,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   check_http_response
   OAUTH_REFRESH_TOKEN=$(sed -n 's/.*"refresh_token": "\([^"]*\).*/\1/p' "$RESPONSE_FILE")
   echo "OAUTH_REFRESH_TOKEN=$OAUTH_REFRESH_TOKEN" >> "$CONFIG_FILE"
+  export OAUTH_REFRESH_TOKEN=$OAUTH_REFRESH_TOKEN
 fi
 echo " done"
 
