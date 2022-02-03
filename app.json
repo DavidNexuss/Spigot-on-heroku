@@ -37,7 +37,7 @@
       "required": false
     },
     "OAUTH_REFRESH_TOKEN": {
-      "description": "Dropbox app access token"
+      "description": "Dropbox app access token",
       "required": false
     }
   },
