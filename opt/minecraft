@@ -13,76 +13,6 @@ fi
 echo "-----> Configuring DU config file..."
 CONFIG_FILE=~/.dropbox_uploader
 RESPONSE_FILE="/tmp/du_resp_$RANDOM"
-function remove_temp_files
-{
-    if [[ $DEBUG == 0 ]]; then
-        rm -fr "$RESPONSE_FILE"
-        rm -fr "$CHUNK_FILE"
-        rm -fr "$TEMP_FILE"
-    fi
-}
-function check_http_response
-{
-    CODE=$?
-
-    #Checking curl exit code
-    case $CODE in
-
-        #OK
-        0)
-
-        ;;
-
-        #Proxy error
-        5)
-            print "\nError: Couldn't resolve proxy. The given proxy host could not be resolved.\n"
-
-            remove_temp_files
-            exit 1
-        ;;
-
-        #Missing CA certificates
-        60|58|77)
-            print "\nError: cURL is not able to performs peer SSL certificate verification.\n"
-            print "Please, install the default ca-certificates bundle.\n"
-            print "To do this in a Debian/Ubuntu based system, try:\n"
-            print "  sudo apt-get install ca-certificates\n\n"
-            print "If the problem persists, try to use the -k option (insecure).\n"
-
-            remove_temp_files
-            exit 1
-        ;;
-
-        6)
-            print "\nError: Couldn't resolve host.\n"
-
-            remove_temp_files
-            exit 1
-        ;;
-
-        7)
-            print "\nError: Couldn't connect to host.\n"
-
-            remove_temp_files
-            exit 1
-        ;;
-
-    esac
-
-    #Checking response file for generic errors
-    if grep -q "^HTTP/[12].* 400" "$RESPONSE_FILE"; then
-        ERROR_MSG=$(sed -n -e 's/{"error": "\([^"]*\)"}/\1/p' "$RESPONSE_FILE")
-
-        case $ERROR_MSG in
-             *access?attempt?failed?because?this?app?is?not?configured?to?have*)
-                echo -e "\nError: The Permission type/Access level configured doesn't match the DropBox App settings!\nPlease run \"$0 unlink\" and try again."
-                exit 1
-            ;;
-        esac
-
-    fi
-
-}
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "CONFIGFILE_VERSION=2.0" > "$CONFIG_FILE"
   echo "OAUTH_APP_KEY=$OAUTH_APP_KEY" >> "$CONFIG_FILE"
@@ -90,7 +20,6 @@ if [ ! -f "$CONFIG_FILE" ]; then
   if [ -z "$OAUTH_REFRESH_TOKEN" ]; then
     API_OAUTH_TOKEN="https://api.dropbox.com/oauth2/token"
     curl $API_OAUTH_TOKEN -d code=$access_code -d grant_type=authorization_code -u $OAUTH_APP_KEY:$OAUTH_APP_SECRET -o "$RESPONSE_FILE" 2>/dev/null
-    check_http_response
     OAUTH_REFRESH_TOKEN=$(sed -n 's/.*"refresh_token": "\([^"]*\).*/\1/p' "$RESPONSE_FILE")
   fi
   echo "OAUTH_REFRESH_TOKEN=$OAUTH_REFRESH_TOKEN" >> "$CONFIG_FILE"
