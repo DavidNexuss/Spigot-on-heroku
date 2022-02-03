@@ -9,11 +9,6 @@ if [ -z "$NGROK_API_TOKEN" ]; then
   exit 1
 fi
 
-if [ -z "$DBCONFIG" ]; then
-  echo "You must specify the Dropbox access token!. I would recommend using dropbox."
-  exit 1
-fi
-
 # Download dropbox uploader config file
 echo "-----> Configuring DU config file..."
 CONFIG_FILE=~/.dropbox_uploader
