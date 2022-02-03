@@ -12,6 +12,7 @@ fi
 # Download dropbox uploader config file
 echo "-----> Configuring DU config file..."
 CONFIG_FILE=~/.dropbox_uploader
+RESPONSE_FILE="/tmp/du_resp_$RANDOM"
 function remove_temp_files
 {
     if [[ $DEBUG == 0 ]]; then
@@ -87,7 +88,6 @@ if [ ! -f "$CONFIG_FILE" ]; then
   echo "OAUTH_APP_KEY=$OAUTH_APP_KEY" >> "$CONFIG_FILE"
   echo "OAUTH_APP_SECRET=$OAUTH_APP_SECRET" >> "$CONFIG_FILE"
   API_OAUTH_TOKEN="https://api.dropbox.com/oauth2/token"
-  API_OAUTH_AUTHORIZE="https://www.dropbox.com/oauth2/authorize"
   RESPONSE_FILE="/tmp/du_resp_$RANDOM"
   curl $API_OAUTH_TOKEN -d code=$access_code -d grant_type=authorization_code -u $OAUTH_APP_KEY:$OAUTH_APP_SECRET -o "$RESPONSE_FILE" 2>/dev/null
   check_http_response
