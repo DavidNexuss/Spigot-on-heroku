@@ -29,8 +29,8 @@ echo " done"
 
 # Start the TCP tunnel - remove - to run ngrok
 echo "-----> Starting ngrok tunnel..."
-ngrok_cmd="/app/bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
-eval "$ngrok_cmd | tee /app/web/ngrok.log &"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} ${mc_port}"
+eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
  
 # Installing Dropbox sync
