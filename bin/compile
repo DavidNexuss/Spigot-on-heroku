@@ -107,6 +107,7 @@ if [ -n "${MINECRAFT_EULA:-""}" ]; then
 fi
 
 mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/web
 [ ! -f $BUILD_DIR/minecraft ]   && cp $OPT_DIR/minecraft $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/sync ]        && cp $OPT_DIR/sync $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR/web
