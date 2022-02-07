@@ -109,7 +109,7 @@ fi
 mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/minecraft ]   && cp $OPT_DIR/minecraft $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/sync ]        && cp $OPT_DIR/sync $BUILD_DIR/bin
-[ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
+[ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR/web
 [ ! -f $BUILD_DIR/refresh ]        && cp $OPT_DIR/refresh $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/ngrokgetip ]        && cp $OPT_DIR/ngrokgetip $BUILD_DIR
 [ ! -f $BUILD_DIR/runserver ]        && cp $OPT_DIR/runserver $BUILD_DIR
