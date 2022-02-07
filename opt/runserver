@@ -11,5 +11,5 @@ case $limit in
   heap="530m"
   ;;
 esac
-export NGROKIP=$(./ngrokgetip)
+export NGROKIP=$(/app/web/ngrokgetip)
 java -Xms${heap} -Xmx${heap} -jar papermc.jar nogui
