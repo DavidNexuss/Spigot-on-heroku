@@ -49,9 +49,9 @@ echo " done"
 #eval "while true; do sleep 120; wget "http://api.dynu.com/nic/update?hostname=mineshift.dynu.net&username=kimbang012&password=07f32eef1cbf2e8c2887631d5d1e2032"; done &"
 
 echo "-----> Starting Dropbox Sync..."
-bak = backup.zip
+bak=backup.zip
 if [ $? -ne 0 ]; then
-bak = backup.zip.bak
+bak=backup.zip.bak
 fi
 ./backup.sh download $bak
 unzip $bak
