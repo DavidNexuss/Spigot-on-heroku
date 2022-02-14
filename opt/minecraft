@@ -49,10 +49,14 @@ echo " done"
 #eval "while true; do sleep 120; wget "http://api.dynu.com/nic/update?hostname=mineshift.dynu.net&username=kimbang012&password=07f32eef1cbf2e8c2887631d5d1e2032"; done &"
 
 echo "-----> Starting Dropbox Sync..."
-./backup.sh download backup.zip 
-unzip backup
-rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup.zip; zip -r backup $additional_files .dropbox_uploader world* mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; rm backup.zip; done &"
+bak = backup.zip
+if [ $? -ne 0 ]; then
+bak = backup.zip.bak
+fi
+./backup.sh download $bak
+unzip $bak
+rm $bak
+eval "while true; do sleep 300; ./backup.sh move backup.zip backup.zip.bak; zip -r backup $additional_files .dropbox_uploader world* mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; ./backup.sh delete backup.zip.bak; done &"
 echo " done"
 dropbox_pid=$!
 
