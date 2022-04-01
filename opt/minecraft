@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-public_ip= `wget http://ipecho.net/plain -O - -q ; echo`
+public_ip=`wget http://ipecho.net/plain -O - -q ; echo`
 mc_port=25565
 port=${1:-${PORT:-8080}}
 
