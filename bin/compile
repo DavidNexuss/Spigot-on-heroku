@@ -91,8 +91,9 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 
 echo "done"
 
-minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
-minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
+minecraft_version=${MINECRAFT_VERSION:-"Paper-1.12.2"}
+minecraft_url=${PAPER:-"https://api.papermc.io/v2/projects/paper/versions/1.12.2/builds/1620/downloads/paper-1.12.2-1620.jar
+"}
 
 echo "------> Installing PaperClipMC from $minecraft_url"
 curl -o papermc.jar -s -L $minecraft_url
