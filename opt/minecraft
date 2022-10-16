@@ -120,7 +120,7 @@ tail_pid=$!
 trap "kill $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid" SIGTERM
 trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGKILL
 
-sed s/\{\{IP\}\}/$(~/ngrokgetip) ~/web/index.html > ~/web/index.html
+sed s/\{\{IP\}\}/$(~/ngrokgetip)/ ~/web/index.html > ~/web/index.html
 eval "python -m http.server ${port} --directory ~/web/ &"
 if [ $? -ne 0 ]; then
   eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd + \"/web\").start' &"
