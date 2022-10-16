@@ -1,12 +1,12 @@
 {
   "name": "Minecraft",
-  "description": "Spigot on Heroku",
+  "description": "Paper on Heroku",
   "keywords": [
     "games",
     "minecraft",
     "spigot"
   ],
-  "repository": "https://github.com/kimbang012/Spigot-on-Heroku",
+  "repository": "https://github.com/thury/Paper-on-heroku",
   "env": {
     "MINECRAFT_EULA": {
       "description": "Do you accept the Minecraft EULA?",
