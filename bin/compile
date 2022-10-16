@@ -61,11 +61,7 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 echo "-----> Installing DDClient... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall ddclient | indent
 
-sleep 3
-
 echo "-----> Almost there..."
-
-sleep 5
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
@@ -121,6 +117,5 @@ chmod +x $BUILD_DIR/bin/sync
 chmod +x $BUILD_DIR/bin/refresh
 chmod +x $BUILD_DIR/ngrokgetip
 chmod +x $BUILD_DIR/runserver
-sleep 5
 
 echo "-----> Installation completed! <-----"
