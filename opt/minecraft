@@ -18,12 +18,12 @@ if [ ! -f "$CONFIG_FILE" ]; then
   echo "OAUTH_APP_KEY=$OAUTH_APP_KEY" >> "$CONFIG_FILE"
   echo "OAUTH_APP_SECRET=$OAUTH_APP_SECRET" >> "$CONFIG_FILE"
   if [ -z "$OAUTH_REFRESH_TOKEN" ]; then
-    API_OAUTH_TOKEN="https://api.dropbox.com/oauth2/token"
     if [ -z "$access_code" ]; then
       echo "You must set the access_code config var to create Dropbox backups"
       exit 1
     else
-      curl $API_OAUTH_TOKEN -d code=$access_code -d grant_type=authorization_code -u $OAUTH_APP_KEY:$OAUTH_APP_SECRET -o "$RESPONSE_FILE" 2>/dev/null
+      curl https://api.dropbox.com/oauth2/token -d code=$access_code \
+        -d grant_type=authorization_code -u $OAUTH_APP_KEY:$OAUTH_APP_SECRET -o "$RESPONSE_FILE" 2>/dev/null
       OAUTH_REFRESH_TOKEN=$(sed -n 's/.*"refresh_token": "\([^"]*\).*/\1/p' "$RESPONSE_FILE")
     fi
   fi
