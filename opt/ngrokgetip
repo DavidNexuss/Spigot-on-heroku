@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 TEXT=$(curl http://127.0.0.1:4040/api/tunnels)
-TEXT=$(echo $TEXT | grep -Po '\d+.+ngrok.+\d+' -)
+TEXT=$(echo $TEXT | grep -Po "\d.tcp.ngrok.io.\d+" -)
 echo $TEXT
