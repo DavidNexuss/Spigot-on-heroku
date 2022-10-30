@@ -9,14 +9,26 @@ if [ -z "$NGROK_API_TOKEN" ]; then
   exit 1
 fi
 
-if [ -z "$DBCONFIG" ]; then
-  echo "You must specify the Dropbox access token!. I would recommend using dropbox."
-  exit 1
-fi
-
 # Download dropbox uploader config file
 echo "-----> Configuring DU config file..."
-echo OAUTH_ACCESS_TOKEN=$DBCONFIG > .dropbox_uploader
+CONFIG_FILE=~/.dropbox_uploader
+RESPONSE_FILE="/tmp/du_resp_$RANDOM"
+if [ ! -f "$CONFIG_FILE" ]; then
+  echo "CONFIGFILE_VERSION=2.0" > "$CONFIG_FILE"
+  echo "OAUTH_APP_KEY=$OAUTH_APP_KEY" >> "$CONFIG_FILE"
+  echo "OAUTH_APP_SECRET=$OAUTH_APP_SECRET" >> "$CONFIG_FILE"
+  if [ -z "$OAUTH_REFRESH_TOKEN" ]; then
+    if [ -z "$access_code" ]; then
+      echo "You must set the access_code config var to create Dropbox backups"
+      exit 1
+    else
+      curl https://api.dropbox.com/oauth2/token -d code=$access_code -d grant_type=authorization_code -u $OAUTH_APP_KEY:$OAUTH_APP_SECRET -o "$RESPONSE_FILE"
+      export OAUTH_REFRESH_TOKEN=$(sed -n 's/.*"refresh_token": "\([^"]*\).*/\1/p' "$RESPONSE_FILE")
+    fi
+  fi
+  echo "OAUTH_REFRESH_TOKEN=$OAUTH_REFRESH_TOKEN" >> "$CONFIG_FILE"
+  export OAUTH_REFRESH_TOKEN=$OAUTH_REFRESH_TOKEN
+fi
 echo " done"
 
 # Start the TCP tunnel - remove - to run ngrok
@@ -34,25 +46,26 @@ chmod +x backup.sh
 # more info here https://github.com/andreafabrizi/Dropbox-Uploader
 echo " done"
 
-#echo "-----> Updating IP to afraid.org/dnsexit.com..."
-#eval "while true; do sleep 120; curl http://freedns.afraid.org/dynamic/update.php?VmU3eXhjV0MzMTZxNVNCaEhxVXZLVndrOjE2OTg3ODEz; done &"
-#eval "while true; do sleep 120; wget "http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=sv.mineshift.linkpc.net"; done &"
-#eval "while true; do sleep 120; wget "http://update.dnsexit.com/RemoteUpdate.sv?login=kimbang012&password=kimbang012&host=mineshift.linkpc.net"; done &"
-#eval "while true; do sleep 120; wget "http://api.dynu.com/nic/update?hostname=mineshift.dynu.net&username=kimbang012&password=07f32eef1cbf2e8c2887631d5d1e2032"; done &"
-
 echo "-----> Starting Dropbox Sync..."
-./backup.sh download backup.zip 
-unzip backup
-rm backup.zip
-eval "while true; do sleep 300; ./backup.sh delete backup.zip; zip -r backup world world_nether world_the_end mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; rm backup.zip; done &"
+bak=backup.zip
+./backup.sh download $bak
+if [ $? -ne 0 ]; then
+  bak=backup.zip.bak
+  ./backup.sh download $bak
+fi
+unzip $bak
+rm $bak
+eval "while true; do sleep 300; ./backup.sh move backup.zip backup.zip.bak; zip -r backup $additional_files .dropbox_uploader world* mstore plugins server.properties bukkit.yml spigot.yml paper.yml banned-ips.json banned-players.json whitelist.json permissions.yml ops.json; ./backup.sh upload backup.zip /; ./backup.sh delete backup.zip.bak; done &"
 echo " done"
 dropbox_pid=$!
 
 # Do an inline sync first, then start the background job
-echo "-----> Start sync to AWS..."
-bin/sync
-eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
-sync_pid=$!
+if [ -n "AWS_BUCKET" ]; then
+	echo "-----> Start sync to AWS..."
+	bin/sync
+	eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
+	sync_pid=$!
+fi
 
 echo "-----> Configuring server settings..."
 # accept eula
@@ -106,5 +119,9 @@ tail_pid=$!
 trap "kill $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid" SIGTERM
 trap "kill -300 $ngrok_pid $main_pid $sync_pid $tail_pid $dropbox_pid exit" SIGKILL
 
-eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start' &"
+~/ngrokgetip > ~/web/index.html
+eval "python -m http.server ${port} --directory ~/web/ &"
+if [ $? -ne 0 ]; then
+  eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => ${port}, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd + \"/web\").start' &"
+fi
 eval "while true; do sleep 600; echo "Refreshing dyno"; echo $HEROKU_URL; curl $HEROKU_URL; done"

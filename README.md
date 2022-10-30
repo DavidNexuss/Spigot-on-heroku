@@ -42,9 +42,14 @@ Then, manually add these command with your Ngrok auth token, Dropbox app config 
 
 ```
 $ heroku config:set NGROK_API_TOKEN="xxxxx"
-$ heroku config:set DBCONFIG="xxxxx"
+$ heroku config:set OAUTH_APP_KEY="xxxx"
+$ heroku config:set OAUTH_APP_SECRET="xxxx"
 ```
-**Put your Dropbox Access Token in the DBCONFIG!**
+Replace the fields, which will get your access code:
+https://www.dropbox.com/oauth2/authorize?client_id=${OAUTH_APP_KEY}&token_access_type=offline&response_type=code
+```
+$ heroku config:set access_code="xxxx"
+```
 
 Then copy these commands in the cmd
 

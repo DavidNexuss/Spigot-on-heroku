@@ -40,8 +40,6 @@ echo "Thank you for installing my refix buildpack"
 echo "Thank you jkutner for the original buildpack"
 echo ""
 
-sleep 5
-
 echo "-----> Update and Upgrading system files..."
 apt-get $APT_OPTIONS update | indent
 echo "done"
@@ -61,11 +59,7 @@ apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 echo "-----> Installing DDClient... "
 apt-get $APT_OPTIONS -y --force-yes -d install --reinstall ddclient | indent
 
-sleep 3
-
 echo "-----> Almost there..."
-
-sleep 5
 
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.profile.d
@@ -91,8 +85,8 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 
 echo "done"
 
-minecraft_version=${MINECRAFT_VERSION:-"Paper-1.16"}
-minecraft_url=${PAPER:-"https://papermc.io/ci/job/$MINECRAFT_VERSION/lastSuccessfulBuild/artifact/paperclip.jar"}
+minecraft_version=${MINECRAFT_VERSION:-"Paper-1.12.2"}
+minecraft_url=${PAPER:-"https://api.papermc.io/v2/projects/paper/versions/1.12.2/builds/1620/downloads/paper-1.12.2-1620.jar"}
 
 echo "------> Installing PaperClipMC from $minecraft_url"
 curl -o papermc.jar -s -L $minecraft_url
@@ -107,9 +101,11 @@ if [ -n "${MINECRAFT_EULA:-""}" ]; then
 fi
 
 mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/web
 [ ! -f $BUILD_DIR/minecraft ]   && cp $OPT_DIR/minecraft $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/sync ]        && cp $OPT_DIR/sync $BUILD_DIR/bin
-[ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
+[ ! -f $BUILD_DIR/index.rhtml ] && cp --no-clobber $OPT_DIR/index.rhtml $BUILD_DIR/web
+[ ! -f $BUILD_DIR/index.html ] && cp --no-clobber $OPT_DIR/index.html $BUILD_DIR/web
 [ ! -f $BUILD_DIR/refresh ]        && cp $OPT_DIR/refresh $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/ngrokgetip ]        && cp $OPT_DIR/ngrokgetip $BUILD_DIR
 [ ! -f $BUILD_DIR/runserver ]        && cp $OPT_DIR/runserver $BUILD_DIR
@@ -119,6 +115,5 @@ chmod +x $BUILD_DIR/bin/sync
 chmod +x $BUILD_DIR/bin/refresh
 chmod +x $BUILD_DIR/ngrokgetip
 chmod +x $BUILD_DIR/runserver
-sleep 5
 
 echo "-----> Installation completed! <-----"

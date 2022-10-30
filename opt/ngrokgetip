@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-TEXT=$(cat ngrok.log)
-TEXT=${TEXT#*[Addr:}
-TEXT=${TEXT%%]*}
+TEXT=$(curl http://127.0.0.1:4040/api/tunnels)
+TEXT=$(echo $TEXT | grep -Po "\d.tcp.ngrok.io.\d+" -)
 echo $TEXT
